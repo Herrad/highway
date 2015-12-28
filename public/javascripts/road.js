@@ -1,7 +1,6 @@
 function createRoad(artist, imageCache) {
     var roadTile = imageCache.get("public/images/roadTile.png")
-    var resolvedImages = 0;
-    var imagesToResolve = 2;
+    var cars = []
 
     var from = {
         x: 0,
@@ -30,6 +29,17 @@ function createRoad(artist, imageCache) {
             if (endingGate) {
                 endingGate.draw()
             }
+            _.forEach(cars, function (car) {
+                car.draw()
+            })
+        },
+        act: function () {
+            _.forEach(cars, function (car) {
+                car.act();
+            })
+        },
+        spawnCar: function (car) {
+            cars.push(car)
         }
     }
 

@@ -1,23 +1,28 @@
 function createRoadSegment(artist, roadTile, position) {
 
-    var dimensions = {
+    var initialDimensions = {
         width: 256,
         height: 192
     }
-    return {
-        draw: function (scale) {
-            this.dimensions = {
-                width: 256 * scale,
-                height: 192 * scale
-            }
 
-            artist.image(roadTile, {
-                x: this.position.x * scale,
-                y: this.position.y * scale
-            }, this.dimensions);
+    var initialPosition = position;
+    return {
+        draw: function () {
+
+            artist.image(roadTile, this.position, this.dimensions);
         },
-        position: position,
-        dimensions: dimensions
+        scaleTo: function (scale) {
+            this.dimensions = {
+                width: initialDimensions.width * scale,
+                height: initialDimensions.height * scale
+            }
+            this.position = {
+                x: initialPosition.x * scale,
+                y: initialPosition.y * scale
+            }
+        },
+        position: initialPosition,
+        dimensions: initialDimensions
     }
 
 }

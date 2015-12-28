@@ -7,8 +7,14 @@ function createCar(artist, image, position, speed) {
                 height: 36
             })
         },
-        act: function () {
+        act: function (destination) {
             position.x += speed;
+            if (position.x >= destination.x) {
+                speed = 0;
+            }
+        },
+        stopped: function () {
+            return speed === 0;
         }
     }
 }

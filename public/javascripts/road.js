@@ -12,10 +12,11 @@ function createRoad(artist, imageCache) {
         y: 256
     })
 
-    var endingGate = createGate(artist, imageCache, {
+    var destination = {
         x: 992,
         y: 256
-    })
+    }
+    var endingGate = createGate(artist, imageCache, destination)
 
     return {
         draw: function () {
@@ -35,7 +36,10 @@ function createRoad(artist, imageCache) {
         },
         act: function () {
             _.forEach(cars, function (car) {
-                car.act();
+                if (car.stopped()) {
+                    return _.remove(cars, car)
+                }
+                car.act(destination);
             })
         },
         spawnCar: function (car) {

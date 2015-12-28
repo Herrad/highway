@@ -9,7 +9,7 @@ window.onload = function () {
             road.spawnCar(createCar(artist, imageCache.get("public/images/car-red.png"), {
                 x: 50,
                 y: 356
-            }, 1))
+            }, 5))
 
             function mainLoop() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height)

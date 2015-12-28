@@ -1,10 +1,10 @@
 function createCar(artist, image, position, speed) {
     var position = position;
     return {
-        draw: function () {
+        draw: function (scale) {
             artist.image(image, position, {
-                width: 64,
-                height: 36
+                width: 64 * scale,
+                height: 36 * scale
             })
         },
         act: function (destination) {

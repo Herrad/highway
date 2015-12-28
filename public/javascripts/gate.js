@@ -1,12 +1,10 @@
-function createGate(artist, imageCache, position) {
-    var position
-    var gateTile = imageCache.get("public/images/gateTile.png");
+function createGate(artist, gateTile, position) {
 
     return {
-        draw: function () {
+        draw: function (scale) {
             artist.image(gateTile, position, {
-                width: 16,
-                height: 192
+                width: 16 * scale,
+                height: 192 * scale
             });
         }
     }

@@ -5,8 +5,12 @@ function createGate(artist, gateTile, position) {
     }
     var initialPosition = position;
     return {
-        draw: function () {
-            artist.image(gateTile, this.position, this.dimensions);
+        draw: function (worldCoordinates) {
+            var positionToDraw = {
+                x: this.position.x + worldCoordinates.x,
+                y: this.position.y + worldCoordinates.y,
+            }
+            artist.image(gateTile, positionToDraw, this.dimensions);
         },
         scaleTo: function (scale) {
             this.position = {

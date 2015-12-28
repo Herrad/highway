@@ -15,12 +15,12 @@ function createRoad(artist, imageCache, segments) {
     var endingGate = createGate(artist, imageCache.get("public/images/gateTile.png"), endingGatePosition)
 
     return {
-        draw: function () {
+        draw: function (worldCoordinates) {
             _.forEach(segments, function (segment) {
-                segment.draw();
+                segment.draw(worldCoordinates);
             })
-            startingGate.draw();
-            endingGate.draw();
+            startingGate.draw(worldCoordinates);
+            endingGate.draw(worldCoordinates);
         },
         scaleTo: function (scale) {
             _.forEach(segments, function (segment) {

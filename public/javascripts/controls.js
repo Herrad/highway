@@ -1,4 +1,4 @@
-function createControls(setScale) {
+function createControls(setScale, move) {
     var scale = 1;
     $('canvas').on('wheel', function (e) {
         if (e.originalEvent.deltaY < 0) {
@@ -13,5 +13,35 @@ function createControls(setScale) {
             return scale = 4
         }
         setScale(scale)
+    })
+
+    $(window).on('keydown', function (e) {
+        console.log(e.keyCode)
+        switch (e.keyCode) {
+        case 37:
+            move({
+                x: 10,
+                y: 0
+            })
+            break;
+        case 38:
+            move({
+                x: 0,
+                y: 10
+            })
+            break;
+        case 39:
+            move({
+                x: -10,
+                y: 0
+            })
+            break;
+        case 40:
+            move({
+                x: 0,
+                y: -10
+            })
+            break;
+        }
     })
 }

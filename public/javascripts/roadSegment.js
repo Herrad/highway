@@ -7,9 +7,12 @@ function createRoadSegment(artist, roadTile, position) {
 
     var initialPosition = position;
     return {
-        draw: function () {
-
-            artist.image(roadTile, this.position, this.dimensions);
+        draw: function (worldCoordinates) {
+            var positionToDraw = {
+                x: this.position.x + worldCoordinates.x,
+                y: this.position.y + worldCoordinates.y,
+            }
+            artist.image(roadTile, positionToDraw, this.dimensions);
         },
         scaleTo: function (scale) {
             this.dimensions = {

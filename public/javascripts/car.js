@@ -1,13 +1,14 @@
-function createCar(artist, image, position, speed) {
+function createCar(artist, image, position, destination, road) {
     var position = position;
+    var speed = road.speedLimit;
     return {
-        draw: function (scale) {
+        draw: function () {
             artist.image(image, position, {
-                width: 64 * scale,
-                height: 36 * scale
+                width: 64,
+                height: 36
             })
         },
-        act: function (destination) {
+        act: function () {
             position.x += speed;
             if (position.x >= destination.x) {
                 speed = 0;

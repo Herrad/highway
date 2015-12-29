@@ -1,4 +1,4 @@
-function createControls(setScale, move) {
+function createControls(world) {
     var scale = 1;
     $('canvas').on('wheel', function (e) {
         if (e.originalEvent.deltaY < 0) {
@@ -12,32 +12,32 @@ function createControls(setScale, move) {
         if (scale > 4) {
             return scale = 4
         }
-        setScale(scale)
+        world.zoomTo(scale)
     })
 
     $(window).on('keydown', function (e) {
         console.log(e.keyCode)
         switch (e.keyCode) {
         case 37:
-            move({
+            world.move({
                 x: 10,
                 y: 0
             })
             break;
         case 38:
-            move({
+            world.move({
                 x: 0,
                 y: 10
             })
             break;
         case 39:
-            move({
+            world.move({
                 x: -10,
                 y: 0
             })
             break;
         case 40:
-            move({
+            world.move({
                 x: 0,
                 y: -10
             })

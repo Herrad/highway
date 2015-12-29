@@ -2,10 +2,11 @@ function createRoad(artist, imageCache, segments) {
 
     var initialSegment = segments[0];
     var initialPosition = initialSegment.position;
-    var startingGate = createGate(artist, imageCache.get("public/images/gateTile.png"), {
+    var startingGatePosition = {
         x: initialPosition.x + 16,
         y: initialPosition.y
-    })
+    }
+    var startingGate = createGate(artist, imageCache.get("public/images/gateTile.png"), startingGatePosition)
 
     var lastSegment = segments[segments.length - 1]
     var endingGatePosition = {
@@ -28,6 +29,27 @@ function createRoad(artist, imageCache, segments) {
             })
             startingGate.scaleTo(scale);
             endingGate.scaleTo(scale);
-        }
+        },
+        joiningPositions: [{
+            x: startingGatePosition.x,
+            y: startingGatePosition.y + 52
+        }, {
+            x: startingGatePosition.x,
+            y: startingGatePosition.y + 100
+        }, {
+            x: startingGatePosition.x,
+            y: startingGatePosition.y + 148
+        }],
+        destinations: [{
+            x: endingGatePosition.x,
+            y: endingGatePosition.y + 52
+        }, {
+            x: endingGatePosition.x,
+            y: endingGatePosition.y + 100
+        }, {
+            x: endingGatePosition.x,
+            y: endingGatePosition.y + 148
+        }],
+        speedLimit: 7
     }
 }

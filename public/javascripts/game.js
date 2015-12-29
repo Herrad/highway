@@ -9,12 +9,6 @@ window.onload = function () {
         x: 0,
         y: 256
     }
-    var mapBorders = {
-        x: -80,
-        y: -65,
-        width: 180,
-        height: 150
-    }
 
     var imageCache = createImageCache(["public/images/roadTile.png", "public/images/gateTile.png", "public/images/car-red.png"])
         .then(function (imageCache) {
@@ -25,31 +19,22 @@ window.onload = function () {
             roadBuilder.addSegment()
             roadBuilder.addSegment()
             var road = roadBuilder.getRoad();
+            var world = createWorld(road)
 
             var scale = 1;
+            var controls = createControls(world);
 
-            function setScale(newScale) {
-                road.scaleTo(newScale);
-            }
-
-            function move(by) {
-                var newX = worldCoordinates.x + by.x
-                var newY = worldCoordinates.y + by.y
-                if (newX < mapBorders.x ||
-                    newX > mapBorders.width ||
-                    newY < mapBorders.y ||
-                    newY > mapBorders.height) {
-                    return;
-                }
-
-                worldCoordinates.x = newX;
-                worldCoordinates.y = newY;
-            }
-            var controls = createControls(setScale, move);
+            var carSpawner = createCarSpawner(artist, imageCache, road);
 
             function mainLoop() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height)
-                road.draw(worldCoordinates);
+                road.draw(world.coordinates);
+                carSpawner.drawCars();
+
+                carSpawner.actCars();
+                if (Math.floor(Math.random() * 100) > 90) {
+                    carSpawner.spawnCar();
+                }
             }
 
             setInterval(mainLoop, 1000 / 30);

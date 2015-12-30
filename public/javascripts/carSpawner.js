@@ -1,7 +1,11 @@
 function createCarSpawner(artist, imageCache, road) {
     var activeCars = [];
     return {
-        spawnCar: function () {
+        spawnCar: function (time) {
+            var secondsSinceSpawn = time.since('spawn')
+            if (secondsSinceSpawn !== -1 && secondsSinceSpawn < 5000) {
+                return;
+            }
             var joiningPositions = road.joiningPositions;
 
             var destinations = road.destinations
@@ -17,16 +21,16 @@ function createCarSpawner(artist, imageCache, road) {
 
             var car = createCar(artist, imageCache.get("public/images/car-red.png"), position, destination, road)
             activeCars.push(car);
+            time.eventOccurred('spawn')
         },
         drawCars: function () {
             _.forEach(activeCars, function (car) {
                 car.draw();
             })
         },
-        actCars: function () {
+        actCars: function (secondsSinceLastUpdate) {
             _.forEach(activeCars, function (car) {
-
-                car.act();
+                car.act(secondsSinceLastUpdate);
             })
             activeCars = _.filter(activeCars, function (car) {
                 return !car.stopped();

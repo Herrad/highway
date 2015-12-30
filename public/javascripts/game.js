@@ -12,6 +12,7 @@ window.onload = function () {
 
     var imageCache = createImageCache(["public/images/roadTile.png", "public/images/gateTile.png", "public/images/car-red.png"])
         .then(function (imageCache) {
+            var time = createTime();
             var artist = createArtist(ctx)
             var roadBuilder = createRoadBuilder(artist, imageCache, initialRoadCoordinates);
             roadBuilder.addSegment()
@@ -25,16 +26,20 @@ window.onload = function () {
             var controls = createControls(world);
 
             var carSpawner = createCarSpawner(artist, imageCache, road);
+            var info = $('.info');
 
             function mainLoop() {
+                info.html(Math.floor(1000 / time.since('lastFrame')))
+                time.eventOccurred('lastFrame')
                 ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+                var delta = time.delta()
                 road.draw(world.coordinates);
                 carSpawner.drawCars();
 
-                carSpawner.actCars();
-                if (Math.floor(Math.random() * 100) > 90) {
-                    carSpawner.spawnCar();
-                }
+                carSpawner.actCars(delta / 1000);
+                carSpawner.spawnCar(time);
+
             }
 
             setInterval(mainLoop, 1000 / 30);

@@ -50,6 +50,6 @@ function createRoad(artist, imageCache, segments) {
             x: endingGatePosition.x,
             y: endingGatePosition.y + 148
         }],
-        speedLimit: 7
+        speedLimit: 130
     }
 }

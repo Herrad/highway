@@ -8,8 +8,9 @@ function createCar(artist, image, position, destination, road) {
                 height: 36
             })
         },
-        act: function () {
-            position.x += speed;
+        act: function (secondsSinceLastUpdate) {
+            position.x += speed * secondsSinceLastUpdate;
+            position.x = Math.round(position.x)
             if (position.x >= destination.x) {
                 speed = 0;
             }

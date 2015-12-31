@@ -42,7 +42,7 @@ window.onload = function () {
 
             }
 
-            setInterval(mainLoop, 1000 / 30);
+            setInterval(mainLoop, 1000 / 24);
 
         });
 }

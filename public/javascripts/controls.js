@@ -16,7 +16,6 @@ function createControls(world) {
     })
 
     $(window).on('keydown', function (e) {
-        console.log(e.keyCode)
         switch (e.keyCode) {
         case 37:
             world.move({
@@ -43,5 +42,9 @@ function createControls(world) {
             })
             break;
         }
-    })
+    });
+
+    $('#canvas').on('click', function (e){
+        world.clickAt({x:e.pageX, y:e.pageY});
+    });
 }

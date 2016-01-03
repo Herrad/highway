@@ -32,6 +32,9 @@ function createWorld(road) {
     return {
         zoomTo: setScale,
         coordinates: coordinates,
-        move: move
+        move: move,
+        clickAt:function (position) {
+            road.selectSegment(position);
+        }
     }
 }

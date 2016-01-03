@@ -15,6 +15,13 @@ function createArtist(context) {
             context.lineTo(end.x, end.y);
             context.stroke();
         },
+        box: function (position, dimensions, width, colour) {
+            context.beginPath();
+            context.lineWidth = width
+            context.strokeStyle = colour || "rgb(0,0,0)"
+            context.rect(position.x, position.y, dimensions.width, dimensions.height);
+            context.stroke();
+        },
         image: drawImage,
         tileHorizontally: function (image, initialPositon, size, iterations) {
             if (!iterations) {

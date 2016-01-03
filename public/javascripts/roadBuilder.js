@@ -1,4 +1,4 @@
-function createRoadBuilder(artist, imageCache, initialPosition) {
+function createRoadBuilder(artist, imageCache, collision, initialPosition) {
     var roadSegments = []
     var nextPosition = {
         x: initialPosition.x,
@@ -17,7 +17,7 @@ function createRoadBuilder(artist, imageCache, initialPosition) {
     return {
         addSegment: addSegment,
         getRoad: function () {
-            return createRoad(artist, imageCache, roadSegments)
+            return createRoad(artist, imageCache, collision, roadSegments)
         }
     }
 }

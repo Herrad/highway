@@ -16,7 +16,7 @@ function createRoadSegment(artist, roadTile, position) {
             }
             artist.image(roadTile, positionToDraw, this.dimensions);
             if(highlighted){
-                artist.box(positionToDraw, this.dimensions, 3, "rgb(120,0,180)");
+                artist.box(positionToDraw, this.dimensions, this.dimensions.width/50, "rgb(120,0,180)");
             }
         },
         scaleTo: function (scale) {

@@ -47,4 +47,4 @@ function createControls(world) {
     $('#canvas').on('click', function (e){
         world.clickAt({x:world.coordinates.x +  e.pageX, y:world.coordinates.y +  e.pageY});
     });
-}
+} 

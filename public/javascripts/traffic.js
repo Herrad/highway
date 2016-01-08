@@ -1,9 +1,10 @@
-function createTraffic(artist){
-	var cars =[];
-	return {
-        draw: function () {
+function createTraffic(artist) {
+    var cars = [];
+    var scale = 1;
+    return {
+        draw: function (worldPosition) {
             _.forEach(cars, function (car) {
-                car.draw();
+                car.draw(worldPosition);
             })
         },
         act: function (secondsSinceLastUpdate) {
@@ -14,8 +15,13 @@ function createTraffic(artist){
                 return !car.stopped();
             })
         },
-        carJoined: function(car){
-        	cars.push(car);
+        carJoined: function (car) {
+            cars.push(car);
+        },
+        scaleTo: function (newScale) {
+            // _.forEach(cars, function (car) {
+            //     car.scaleTo(newScale);
+            // });
         }
-	}	
+    }
 }

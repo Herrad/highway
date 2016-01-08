@@ -21,12 +21,11 @@ window.onload = function () {
             roadBuilder.addSegment()
             roadBuilder.addSegment()
             var road = roadBuilder.getRoad();
-            var world = createWorld(road)
+            var traffic = createTraffic();
+            var world = createWorld(road, traffic);
 
             var scale = 1;
             var controls = createControls(world);
-
-            var traffic = createTraffic();
             var carSpawner = createCarSpawner(artist, imageCache, road, traffic);
             var info = $('.info');
 
@@ -37,7 +36,7 @@ window.onload = function () {
 
                 var delta = time.delta()
                 road.draw(world.coordinates);
-                traffic.draw();
+                traffic.draw(world.coordinates);
                 traffic.act(delta / 1000);
                 carSpawner.spawnCar(time);
 

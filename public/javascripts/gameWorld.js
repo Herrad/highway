@@ -1,4 +1,4 @@
-function createWorld(road) {
+function createWorld(road, traffic) {
     var scale = 1;
     var coordinates = {
         x: 0,
@@ -12,8 +12,9 @@ function createWorld(road) {
     }
 
     function setScale(newScale) {
-        scale = newScale;
-        road.scaleTo(newScale);
+        // scale = newScale;
+        // road.scaleTo(newScale);
+        // traffic.scaleTo(scale);
     }
 
     function move(by) {
@@ -33,7 +34,7 @@ function createWorld(road) {
         zoomTo: setScale,
         coordinates: coordinates,
         move: move,
-        clickAt:function (position) {
+        clickAt: function (position) {
             road.selectSegment(position);
         }
     }

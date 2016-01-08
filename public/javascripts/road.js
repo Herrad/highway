@@ -17,6 +17,40 @@ function createRoad(artist, imageCache, collision, segments) {
 
     var selectedSegment;
 
+    var joiningPositions = [{
+        x: startingGatePosition.x,
+        y: startingGatePosition.y + 52
+    }, {
+        x: startingGatePosition.x,
+        y: startingGatePosition.y + 100
+    }, {
+        x: startingGatePosition.x,
+        y: startingGatePosition.y + 148
+    }];
+
+    var destinations = [{
+        x: endingGatePosition.x,
+        y: endingGatePosition.y + 52
+    }, {
+        x: endingGatePosition.x,
+        y: endingGatePosition.y + 100
+    }, {
+        x: endingGatePosition.x,
+        y: endingGatePosition.y + 148
+    }];
+
+    function scalePositionsTo(scale) {
+        _.forEach(joiningPositions, function (position) {
+            position.x = position.x * scale;
+            position.y = position.y * scale;
+        });
+
+        _.forEach(destinations, function (position) {
+            position.x = position.x * scale;
+            position.y = position.y * scale;
+        });
+    }
+
     return {
         draw: function (worldCoordinates) {
             _.forEach(segments, function (segment) {
@@ -26,44 +60,28 @@ function createRoad(artist, imageCache, collision, segments) {
             endingGate.draw(worldCoordinates);
         },
         scaleTo: function (scale) {
-            _.forEach(segments, function (segment) {
-                segment.scaleTo(scale);
-            })
-            startingGate.scaleTo(scale);
-            endingGate.scaleTo(scale);
+            // _.forEach(segments, function (segment) {
+            //     segment.scaleTo(scale);
+            // })
+            // startingGate.scaleTo(scale);
+            // endingGate.scaleTo(scale);
+            // scalePositionsTo(scale);
         },
+        moveTo: function (position) {},
         selectSegment: function (point) {
             var segment = collision.getBoxFor(segments, point);
-            if(!segment) {
+            if (!segment) {
                 return;
             }
-            if(selectedSegment) {
-                selectedSegment.toggleHighlight();    
+            if (selectedSegment) {
+                selectedSegment.toggleHighlight();
             }
             selectedSegment = segment;
             selectedSegment.toggleHighlight();
-            
+
         },
-        joiningPositions: [{
-            x: startingGatePosition.x,
-            y: startingGatePosition.y + 52
-        }, {
-            x: startingGatePosition.x,
-            y: startingGatePosition.y + 100
-        }, {
-            x: startingGatePosition.x,
-            y: startingGatePosition.y + 148
-        }],
-        destinations: [{
-            x: endingGatePosition.x,
-            y: endingGatePosition.y + 52
-        }, {
-            x: endingGatePosition.x,
-            y: endingGatePosition.y + 100
-        }, {
-            x: endingGatePosition.x,
-            y: endingGatePosition.y + 148
-        }],
+        joiningPositions: joiningPositions,
+        destinations: destinations,
         speedLimit: 130
     }
 }

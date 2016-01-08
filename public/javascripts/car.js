@@ -1,11 +1,16 @@
 function createCar(artist, image, position, destination, road) {
     var position = position;
     var speed = road.speedLimit;
+    var scale = 1;
     return {
-        draw: function (scale) {
-            artist.image(image, position, {
-                width: 64,
-                height: 36
+        draw: function (worldPosition) {
+            var pos = {
+                x: worldPosition.x + position.x,
+                y: worldPosition.y + position.y
+            }
+            artist.image(image, pos, {
+                width: 64 * scale,
+                height: 36 * scale
             })
         },
         act: function (secondsSinceLastUpdate) {
@@ -17,6 +22,13 @@ function createCar(artist, image, position, destination, road) {
         },
         stopped: function () {
             return speed === 0;
+        },
+        scaleTo: function (newScale) {
+            scale = newScale;
+            position = {
+                x: position.x * newScale,
+                y: position.y * newScale
+            }
         }
     }
 }

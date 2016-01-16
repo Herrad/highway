@@ -3,7 +3,7 @@ function createCarSpawner(artist, imageCache, road, traffic) {
     return {
         spawnCar: function (time) {
             var secondsSinceSpawn = time.since('spawn')
-            if (secondsSinceSpawn !== -1 && secondsSinceSpawn < 5000) {
+            if (secondsSinceSpawn !== -1 && secondsSinceSpawn < 1000) {
                 return;
             }
             var joiningPositions = road.joiningPositions;

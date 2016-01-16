@@ -10,7 +10,7 @@ window.onload = function () {
         y: 256
     }
 
-    var imageCache = createImageCache(["public/images/roadTile.png", "public/images/gateTile.png", "public/images/car-red.png"])
+    var imageCache = createImageCache(["public/images/roadTile.png", "public/images/gateTile.png", "public/images/car-red.png", "public/images/matrix.png"])
         .then(function (imageCache) {
             var collision = createCollisionDetection();
             var time = createTime();

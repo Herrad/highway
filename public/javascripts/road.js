@@ -51,22 +51,29 @@ function createRoad(artist, imageCache, collision, segments) {
         });
     }
 
+    function drawMatrixSigns(worldCoordinates) {
+        _.forEach(segments, function (segment, index) {
+            if ((index + 1) % 4 === 0) {
+                var matrixPosition = segment.getPositionToDraw(worldCoordinates);
+                matrixPosition.x = matrixPosition.x + segment.dimensions.width / 8;
+                artist.image(imageCache.get("public/images/matrix.png"), matrixPosition, {
+                    width: segment.dimensions.width / 8,
+                    height: segment.dimensions.height
+                })
+            }
+        });
+    }
+
     return {
         draw: function (worldCoordinates) {
             _.forEach(segments, function (segment) {
                 segment.draw(worldCoordinates);
-            })
+            });
+            drawMatrixSigns(worldCoordinates);
             startingGate.draw(worldCoordinates);
             endingGate.draw(worldCoordinates);
         },
-        scaleTo: function (scale) {
-            // _.forEach(segments, function (segment) {
-            //     segment.scaleTo(scale);
-            // })
-            // startingGate.scaleTo(scale);
-            // endingGate.scaleTo(scale);
-            // scalePositionsTo(scale);
-        },
+        scaleTo: function (scale) {},
         moveTo: function (position) {},
         selectSegment: function (point) {
             var segment = collision.getBoxFor(segments, point);

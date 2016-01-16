@@ -10,14 +10,12 @@ function createRoadSegment(artist, roadTile, position) {
 
     return {
         draw: function (worldCoordinates) {
-            var positionToDraw = {
-                x: this.position.x + worldCoordinates.x,
-                y: this.position.y + worldCoordinates.y,
-            }
+            var positionToDraw = this.getPositionToDraw(worldCoordinates);
             artist.image(roadTile, positionToDraw, this.dimensions);
-            if(highlighted){
-                artist.box(positionToDraw, this.dimensions, this.dimensions.width/50, "rgb(120,0,180)");
+            if (highlighted) {
+                artist.box(positionToDraw, this.dimensions, this.dimensions.width / 50, "rgb(120,0,180)");
             }
+            artist.image(roadTile, this.getPositionToDraw(worldCoordinates), this.dimensions);
         },
         scaleTo: function (scale) {
             this.dimensions = {
@@ -31,6 +29,13 @@ function createRoadSegment(artist, roadTile, position) {
         },
         toggleHighlight: function () {
             highlighted = !highlighted;
+        },
+        getPositionToDraw: function (worldCoordinates) {
+            var positionToDraw = {
+                x: this.position.x + worldCoordinates.x,
+                y: this.position.y + worldCoordinates.y,
+            }
+            return positionToDraw;
         },
         position: initialPosition,
         dimensions: initialDimensions
